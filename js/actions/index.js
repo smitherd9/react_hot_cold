@@ -5,8 +5,8 @@
 // Display message hot or cold to user 
 // Update number of guesses
 
-var RANDOM_NUM = 'RANDOM_NUM';
-var generateRandomNum = function(randomNum) {
+export const RANDOM_NUM = 'RANDOM_NUM';
+export const generateRandomNum = (randomNum) => {
 	return {
 		type: RANDOM_NUM,
 		randomNum: randomNum 
@@ -15,8 +15,8 @@ var generateRandomNum = function(randomNum) {
 }
 
 
-var GUESS = 'GUESS';
-var userGuess = function(guess){
+export const GUESS = 'GUESS';
+export const userGuess = (guess) => {
 	return {
 		type: GUESS,
 		guess: guess
@@ -24,8 +24,8 @@ var userGuess = function(guess){
 }
 
 
-var MESSAGE = 'MESSAGE';
-var displayMessage = function(message) {
+export const MESSAGE = 'MESSAGE';
+export const displayMessage = (message) => {
 	return {
 		type: MESSAGE,
 		message: message
@@ -33,12 +33,20 @@ var displayMessage = function(message) {
 	}
 }
 
+export const NEWGAME = 'NEWGAME';
+export const newGame = () => {
+	return {
+		type: NEWGAME,
+		newgame: newgame
+	}
+}
 
-exports.RANDOM_NUM = RANDOM_NUM;
-exports.generateRandomNum = generateRandomNum;
-exports.GUESS = GUESS;
-exports.userGuess = userGuess;
-exports.MESSAGE = MESSAGE;
-exports.displayMessage = displayMessage;
+
+// export RANDOM_NUM = RANDOM_NUM;
+// export generateRandomNum = generateRandomNum;
+// export GUESS = GUESS;
+// export userGuess = userGuess;
+// export MESSAGE = MESSAGE;
+// export displayMessage = displayMessage;
 // exports.UPDATE = UPDATE;
 // exports.updateNumGuess = updateNumGuess;

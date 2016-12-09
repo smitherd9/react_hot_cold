@@ -1,23 +1,21 @@
 import redux from 'redux';
-import { creatStore } from redux.createStore;
+
+import { combineReducers, createStore } from 'redux';
+import actions from './actions/index';
+
 
 import reducers from './reducers/index';
+import HotColdReducer from './reducers/index';
 
-let store = createStore(reducers.HotColdReducer);
+// const HotColdReducer = combineReducers({
+// 	HotColdReducer
 
-import { RANDOM_NUM, GUESS, MESSAGE } from './actions/index'
+// });
 
-console.log(store.getState())
-
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-)
-
-store.dispatch(MESSAGE())
+let store = createStore(HotColdReducer);
 
 
+console.log(store.getState());
 
 
-
-unsubscribe()
-module.exports  = store;
+export default store;
