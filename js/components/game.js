@@ -7,13 +7,13 @@ import { connect } from 'react-redux';
 import Messages from './messages';
 import Guess from './guess';
 
-class Game extends React.Component {
+export default class Game extends React.Component {
 	constructor(props){
 	super(props);
-	store.dispatch(actions.generateRandomNum(8));
+
 
 	}
-	
+
 	// getRandomNum() {
 	// 	let randomNum = Math.floor((Math.random() * 100) + 1);
 		 		
@@ -30,10 +30,10 @@ class Game extends React.Component {
 	}
 }
 
-let mapStateToProps = (state, props) => {
-    return {
-        randomNum: state.randomNum
-    }
-};
+// let mapStateToProps = (state, props) => {
+//     return {
+//         randomNum: state.randomNum
+//     }
+// };
 
-export default connect(mapStateToProps)(Game);
+// export default connect(mapStateToProps)(Game);

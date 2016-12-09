@@ -5,12 +5,13 @@ import store from '../store';
 
 export default class Guess extends React.Component {
 	constructor(props){
-		super(props);
-		$('#guessButton').click(function(e){
-			e.preventDefault();
-			store.dispatch(actions.userGuess("Hello"));
-		});
+		super(props);	
 		
+	}
+
+	handleClick(e) {
+		e.preventDefault();
+		store.dispatch(actions.userGuess("Hello"));
 	}
 
 
@@ -20,7 +21,7 @@ export default class Guess extends React.Component {
 				<div>
 				<form>
 				<input type="text" className="userGuess" id="userGuess" maxLength="3" autoComplete="off" placeholder="Enter your Guess" required/>
-      			<input type="submit" id="guessButton" className="button" value="Guess"/>
+      			<input type="submit" id="guessButton" className="button" onClick={this.handleClick()} value="Guess"/>
 				</form>
 			
       			<p>Guess #<span id="count">0</span>!</p>

@@ -12,7 +12,7 @@ export default class NewGame extends React.Component {
 
 	    newGame() {
 	        this.props.dispatch(
-	            actions.newGame
+	            actions.newGame()
 	        );
 	    }
 
