@@ -11,13 +11,9 @@ export default class Game extends React.Component {
 	constructor(props){
 	super(props);
 
-
 	}
 
-	// getRandomNum() {
-	// 	let randomNum = Math.floor((Math.random() * 100) + 1);
-		 		
-	// }
+
 	render() {
 		return ( 
 

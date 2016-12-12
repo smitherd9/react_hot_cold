@@ -22,9 +22,14 @@ class Guess extends React.Component {
 
 	}
 
+	componentDidUpdate() {
+		store.dispatch(actions.fewestGuesses())
+	}
+
 
 
 	render() {
+		
 		return (
 				<div>
 				<form>
@@ -33,6 +38,7 @@ class Guess extends React.Component {
 				</form>
 			
       			<p>Guess #<span id="count">{this.props.guessNumber}</span>!</p>
+      			<p>Fewest Guesses: {this.props.fewestGuesses}</p>
 
 			
 				<ul id="guessList" className="guessBox clearfix">
@@ -46,7 +52,8 @@ class Guess extends React.Component {
 let mapStateToProps = (state, props) => {
     return {
         guess: state.guess,
-        guessNumber: state.guessNumber
+        guessNumber: state.guessNumber,
+        fewestGuesses: state.fewestGuesses
     }
 };
 

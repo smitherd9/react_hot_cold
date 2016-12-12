@@ -12,7 +12,7 @@ const initialGameState = {
     fewestGuesses: ""
 };
 
-// console.log(actions);
+
 const HotColdReducer = function(state, action) {    
     state = state || initialGameState;
 
@@ -76,11 +76,17 @@ const HotColdReducer = function(state, action) {
         });
     }
 
-    // if (action.type === actions.FEWEST){
-    //     return Object.assign({}, state, {
-    //         fewestGuesses: 
-    //     });
-    // }
+    if (action.type === actions.FEWEST){
+        return Object.assign({}, state, {
+            fewestGuesses: action.fewestGuesses
+        });
+    }
+
+    if (action.type === actions.FEWEST_ERR){
+        return Object.assign({}, state, {
+            fewestGuesses: 'Could not retrieve number of fewest guesses.'
+        });
+    }
 
     return state;
     	
