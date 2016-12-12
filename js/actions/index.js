@@ -101,7 +101,7 @@ const saveFewestGuessesErr = (fewestGuesses, err) => {
 
 const fewestGuesses = function(guesses) {
     return function(dispatch) {
-        var url = '/fewest-guesses';
+        var url = 'http://localhost:8000/fewest-guesses';
         return fetch(url).then(function(response) {
             if (response.status < 200 || response.status >= 300) {
                 var error = new Error(response.statusText)
@@ -129,7 +129,14 @@ const fewestGuesses = function(guesses) {
 
 const saveFewestGuesses = function(guesses) {
     return function(dispatch) {
-        var url = '/fewest-guesses';
+        var url = new Request('http://localhost:8000/fewest-guesses', 
+        	{method: 'POST', 
+        	body: JSON.stringify({guesses: guesses}), 
+        	headers: {
+  				'Accept': 'application/json',
+  				'Content-Type': 'application/json'
+  			}
+   });
         return fetch(url).then(function(response) {
             if (response.status < 200 || response.status >= 300) {
                 var error = new Error(response.statusText)

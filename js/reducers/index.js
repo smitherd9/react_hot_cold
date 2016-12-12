@@ -9,7 +9,7 @@ const initialGameState = {
     guessNumber: 0,
 	message: 'Make your guess!',
 	aboutScreen: false,
-    fewestGuesses: ""
+    fewestGuesses: 0
 };
 
 
@@ -59,7 +59,7 @@ const HotColdReducer = function(state, action) {
             guessNumber: 0,
             message: 'Make your guess!',
             aboutScreen: false,
-            fewestGuesses: ""
+            fewestGuesses: 0
         });
         
     }
@@ -85,6 +85,18 @@ const HotColdReducer = function(state, action) {
     if (action.type === actions.FEWEST_ERR){
         return Object.assign({}, state, {
             fewestGuesses: 'Could not retrieve number of fewest guesses.'
+        });
+    }
+
+        if (action.type === actions.SAVE_FEWEST){
+        return Object.assign({}, state, {
+            fewestGuesses: action.fewestGuesses
+        });
+    }
+
+        if (action.type === actions.SAVE_FEWEST_ERR){
+        return Object.assign({}, state, {
+            saveGuess: 'Could not save guesses.'
         });
     }
 

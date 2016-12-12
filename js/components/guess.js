@@ -23,7 +23,13 @@ class Guess extends React.Component {
 	}
 
 	componentDidUpdate() {
-		store.dispatch(actions.fewestGuesses())
+		store.dispatch(actions.fewestGuesses());
+
+		if (this.props.message == 'You won!'){
+			store.dispatch(actions.saveFewestGuesses());
+		}
+
+
 	}
 
 
@@ -51,6 +57,7 @@ class Guess extends React.Component {
 
 let mapStateToProps = (state, props) => {
     return {
+    	message: state.message,
         guess: state.guess,
         guessNumber: state.guessNumber,
         fewestGuesses: state.fewestGuesses
