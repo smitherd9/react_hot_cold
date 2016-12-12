@@ -2,16 +2,24 @@ import React from 'react';
 
 import actions from '../actions/index';
 import store from '../store';
+import { connect } from 'react-redux';
 
-export default class Guess extends React.Component {
+class Guess extends React.Component {
 	constructor(props){
 		super(props);	
-		
+		this.handleClick = this.handleClick.bind(this);
+		this.handleInput = this.handleInput.bind(this);
 	}
 
 	handleClick(e) {
-		e.preventDefault();
-		store.dispatch(actions.userGuess("Hello"));
+		e.preventDefault();			
+		store.dispatch(actions.checkNumber(store.getState().guess));
+	}
+
+	handleInput(e) {
+		store.dispatch(actions.userGuess(e.target.value));
+		console.log(store.getState().guess);
+
 	}
 
 
@@ -20,11 +28,11 @@ export default class Guess extends React.Component {
 		return (
 				<div>
 				<form>
-				<input type="text" className="userGuess" id="userGuess" maxLength="3" autoComplete="off" placeholder="Enter your Guess" required/>
-      			<input type="submit" id="guessButton" className="button" onClick={this.handleClick()} value="Guess"/>
+				<input type="text" className="userGuess" id="userGuess" maxLength="3" onChange={this.handleInput} autoComplete="off" placeholder="Enter your Guess" required/>
+      			<input type="submit" id="guessButton" className="button" onClick={this.handleClick} value="Guess"/>
 				</form>
 			
-      			<p>Guess #<span id="count">0</span>!</p>
+      			<p>Guess #<span id="count">{this.props.guessNumber}</span>!</p>
 
 			
 				<ul id="guessList" className="guessBox clearfix">
@@ -35,10 +43,11 @@ export default class Guess extends React.Component {
 	}
 }
 
-// let mapStateToProps = (state, props) => {
-//     return {
-//         guess: state.guess
-//     }
-// };
+let mapStateToProps = (state, props) => {
+    return {
+        guess: state.guess,
+        guessNumber: state.guessNumber
+    }
+};
 
-// export default connect(mapStateToProps)(Guess);
+export default connect(mapStateToProps)(Guess);

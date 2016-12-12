@@ -5,64 +5,82 @@ import { combineReducers, createStore } from 'redux';
 const initialGameState = {
 	randomNum: Math.floor((Math.random() * 100) + 1),
 	guess: [],
-	message: []
-	// aboutScreen: false;
+    currentGuess: 0,
+    guessNumber: 0,
+	message: 'Make your guess!',
+	aboutScreen: false,
+    fewestGuesses: ""
 };
 
-
-const HotColdReducer = function(state, action) {
+// console.log(actions);
+const HotColdReducer = function(state, action) {    
     state = state || initialGameState;
-    // if (action.type === actions.RANDOM_NUM) {
-    //     // let number = Math.floor((Math.random() * 100) + 1);
-    //     // let random = state.randomNum.concat(action.randomNum);
-    //     return Object.assign({}, state, {
-    //         randomNum: number
-    //     });
-
-    // }
 
     if (action.type === actions.GUESS) {
-        let guessArr = [];
-        guessArr.push(action.guess);
-    	let newGuess = guessArr.concat(state.guess);
+
     	return Object.assign({}, state, {
-            guess: newGuess
+            currentGuess: action.guess,
+
         });
     }
 
-    if (action.type === actions.MESSAGE){
-    	let guess = state.guess;
-    	let randomNum = state.randomNum;
-            if (state = initialGameState){
+    if (action.type === actions.CHECK) {
+        state.guess.push(state.currentGuess);
+        if (state.currentGuess == state.randomNum) {
+            // winner
+            return Object.assign({}, state, {
+                message: 'You won!',
+                guessNumber: ++state.guessNumber
+            });
+        }
+            else if (Math.abs(state.currentGuess - state.randomNum) <= 5) {
                 return Object.assign({}, state, {
-                    message: 'Make your guess!'
-                    // is it better to just set make your guess the message in initialGameState?              
-                                    
+                    message: 'You\'re burning up!',
+                    guessNumber: ++state.guessNumber
+
                 });
-            } 
-
-    		else if (Math.abs(guess[guess.length-1] - randomNum) <= 5) {
-    			return Object.assign({}, state, {
-    				message: 'You\'re burning up!'   			
-    				   				
-    			});
-    		}
-    		else {
-    			return Object.assign({}, state, {
-    				message: 'It\'s frigid in here!'    				
-    			});
-    		}    		
-    		
-
-    	}
-
-    if (action.type === actions.NEWGAME){
-
+            }
+                else {
+                    return Object.assign({}, state, {
+                        message: 'It\'s frigid in here!',
+                        guessNumber: ++state.guessNumber
+                    });
+                }
+            
+        
     }
 
 
+    if (action.type === actions.NEWGAME){
+        return Object.assign({}, state,  {
+            randomNum: Math.floor((Math.random() * 100) + 1),
+            guess: [],
+            currentGuess: 0,
+            guessNumber: 0,
+            message: 'Make your guess!',
+            aboutScreen: false,
+            fewestGuesses: ""
+        });
+        
+    }
 
+    if (action.type === actions.ABOUT){
+        return Object.assign({}, state, {
+            aboutScreen: true
+        });
+    }
 
+    if (action.type === actions.CLOSE_ABOUT){
+        return Object.assign({}, state, {
+            aboutScreen: false
+        });
+    }
+
+    // if (action.type === actions.FEWEST){
+    //     return Object.assign({}, state, {
+    //         fewestGuesses: 
+    //     });
+    // }
 
     return state;
     	

@@ -12,7 +12,7 @@ import HotColdReducer from './reducers/index';
 
 // });
 
-let store = createStore(HotColdReducer);
+const store = createStore(HotColdReducer);
 
 
 console.log(store.getState());

@@ -1,17 +1,18 @@
 import React from 'react';
 import actions from '../actions/index';
+import About from './about';
+import { connect } from 'react-redux';
+import store from '../store';
 
 
-export class What extends React.Component {
+class What extends React.Component {
 	constructor(props){
 		super(props);
 		this.about = this.about.bind(this);
 	}
 
 	about() {
-		this.props.dispatch(
-			actions.aboutScreen()
-			);
+		store.dispatch(actions.aboutScreen(true));
 	}
 
 
@@ -20,16 +21,13 @@ export class What extends React.Component {
 		console.log(this.props);
 		
 		return (
-		
-		<li><a className="new" href="#" onClick={this.about} >What ?</a></li>
-
-		if ({this.props.aboutScreen}){
-			<About />
-		}
-		
+		<li>		
+		{ this.props.aboutScreen ? (<About />) : (<a className="new" href="#" onClick={this.about} >What ?</a>) }
+		</li>
 
 	   );
 	}
+
 }
 
 const mapStateToProps = (state, props) => {

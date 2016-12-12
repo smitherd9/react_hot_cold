@@ -1,19 +1,20 @@
 import React from 'react';
 import actions from '../actions/index';
+import store from '../store';
+import { connect } from 'react-redux';
 
 
 export default class NewGame extends React.Component {
 	constructor(props){
 		super(props);
 		this.newGame = this.newGame.bind(this);
-		// store.dispatch(actions.newGame());
+		
 
 	}
 
 	    newGame() {
-	        this.props.dispatch(
-	            actions.newGame()
-	        );
+	        store.dispatch(actions.newGame());
+	        console.log(store.getState());
 	    }
 
 
@@ -27,3 +28,11 @@ export default class NewGame extends React.Component {
 	   );
 	}
 }
+
+// let mapStateToProps = (state, props) => {
+//     return {
+//         initialGameState
+//     }
+// };
+
+// export default connect(mapStateToProps)(NewGame);
